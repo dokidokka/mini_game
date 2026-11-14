@@ -18,8 +18,13 @@ class Enemy(
 
     val alive: Boolean get() = currentHealth > 0
 
-    fun recieveDmg(dmg: Int) {
+    fun recieveRegularDmg(dmg: Int) {
         currentHealth = (currentHealth - dmg).coerceAtLeast(0)
     }
+    fun recieveDmgFromSpell(dmg: Int) {
+        currentHealth -= dmg
+    }
+
+    fun getStrForCurrentHP(): String = "HP: ${currentHealth}/${maxHealth}"
 
 }

@@ -28,31 +28,42 @@ class Character(
         return true
     }
 
-    fun create(name: String, characterClass: CharacterClass): Character = when (characterClass) {
-        CharacterClass.Warrior -> Character(
-            displayName = name,
-            characterClass = characterClass,
-            attackRate = 10,
-            currentHealth = 200, maxHealth = 200,
-            currentMana = 0, maxMana = 0,
-            inventory = mutableListOf(Item.HealthPotion, Item.HealthPotion)
-        )
-        CharacterClass.Rogue -> Character(
-            displayName = name,
-            characterClass = characterClass,
-            attackRate = 30,
-            currentHealth = 100, maxHealth = 100,
-            currentMana = 0, maxMana = 0,
-            inventory = mutableListOf(Item.HealthPotion)
-        )
-        CharacterClass.Mage -> Character(
-            displayName = name,
-            characterClass = characterClass,
-            attackRate = 20,
-            currentHealth = 50, maxHealth = 50,
-            currentMana = 100, maxMana = 100,
-            inventory = mutableListOf(Item.HealthPotion, Item.ManaPotion)
-        )
+    fun getStrForCurrentHP(): String = "HP: ${currentHealth}/${maxHealth}"
+    fun getStrForCurrentMP(): String = "MP: ${currentMana}/${maxMana}"
+
+    fun printInventory() : String {
+        if (inventory.isEmpty()) return "Здесь пусто..."
+        return inventory.groupingBy { it }.eachCount()
+            .entries.joinToString(", ") { (item, count) -> "${item.displayName} x$count" }
+    }
+
+    companion object {
+        fun create(name: String, characterClass: CharacterClass): Character = when (characterClass) {
+            CharacterClass.Warrior -> Character(
+                displayName = name,
+                characterClass = characterClass,
+                attackRate = 10,
+                currentHealth = 200, maxHealth = 200,
+                currentMana = 0, maxMana = 0,
+                inventory = mutableListOf(Item.HealthPotion, Item.HealthPotion)
+            )
+            CharacterClass.Rogue -> Character(
+                displayName = name,
+                characterClass = characterClass,
+                attackRate = 30,
+                currentHealth = 100, maxHealth = 100,
+                currentMana = 0, maxMana = 0,
+                inventory = mutableListOf(Item.HealthPotion)
+            )
+            CharacterClass.Mage -> Character(
+                displayName = name,
+                characterClass = characterClass,
+                attackRate = 20,
+                currentHealth = 50, maxHealth = 50,
+                currentMana = 100, maxMana = 100,
+                inventory = mutableListOf(Item.HealthPotion, Item.ManaPotion)
+            )
+        }
     }
 
 }
