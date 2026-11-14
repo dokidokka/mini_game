@@ -108,7 +108,7 @@ class Game (
             return
         }
 
-        character.useItem(Item.HealthPotion)
+        character.useItem(Item.ManaPotion)
         println("Вами было выпито зелье маны. ${character.getStrForCurrentMP()}")
     }
 
